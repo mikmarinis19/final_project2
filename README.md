@@ -1,1 +1,1 @@
-# variants
+This repository will contain a directory to get the data, a directory to do the initial QC, a directory for alignment,a directory for alignment QC,  a directory for variant calling, a directory for filtering and assessing variants, and a directory for comparing and annotating variants. 
