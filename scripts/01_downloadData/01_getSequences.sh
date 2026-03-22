@@ -1,64 +1,33 @@
-#!/bin/bash 
-#SBATCH --job-name=download_reads
+#!/bin/bash
+#SBATCH --job-name=fasterq_dump_xanadu
 #SBATCH -n 1
 #SBATCH -N 1
-#SBATCH -c 4
-#SBATCH --mem=10G
-#SBATCH --qos=general
+#SBATCH -c 12
+#SBATCH --mem=15G
 #SBATCH --partition=general
-#SBATCH --mail-user=
+#SBATCH --qos=general
 #SBATCH --mail-type=ALL
+#SBATCH --mail-user=mim18007@uconn.edu
 #SBATCH -o %x_%j.out
 #SBATCH -e %x_%j.err
-
 
 hostname
 date
 
+#################################################################
+# This code uses my accessionlist to download all the SRA fastq data that I am interesed in.
+# I manually created my accessionlist, which only represents the SRA data listed as "roots".
+# For the purposes of my study, it is the only data that I am interested in.  
+#################################################################
+
 # load software
-module load samtools/1.12 
-module load bedtools/2.29.0
+module load parallel/20180122
+module load sratoolkit/3.0.1
 
-# specify input/output dirs
-OUTDIR=../../data/
-mkdir -p $OUTDIR
+# My outdirectory is fastq and my code uses my accessionlist to select the data to download. 
+OUTDIR=../../fastq
+    mkdir -p ${OUTDIR}
+ACCLIST=../../metadata/accessionlist.txt 
 
-# download a subregion of ashkenazim GIAB trio: chr20:29400000-34400000
-# sort reads by name, convert to fastq. 
-# data: illumina 2x250bp paired end reads
-# there will be lots of errors from bedtools resulting from discordant PE reads. 
-	# this is not an issue in this specific tutorial case, but could be worrisome in other contexts. 
-
-# son -----------------------------
-
-# ILLUMINA
-SON='https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG002_NA24385_son/NIST_Illumina_2x250bps/novoalign_bams/HG002.GRCh38.2x250.bam'
-samtools view -uh $SON chr20:29400000-34400000 | \
-samtools sort -n - | \
-bedtools bamtofastq -i /dev/stdin/ -fq $OUTDIR/son.1.fq -fq2 $OUTDIR/son.2.fq
-
-# mom -----------------------------
-
-# ILLUMINA
-MOM='ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG004_NA24143_mother/NIST_Illumina_2x250bps/novoalign_bams/HG004.GRCh38.2x250.bam'
-samtools view -uh $MOM chr20:29400000-34400000 | \
-samtools sort -n - | \
-bedtools bamtofastq -i /dev/stdin/ -fq $OUTDIR/mom.1.fq -fq2 $OUTDIR/mom.2.fq
-
-# dad -----------------------------
-
-# ILLUMINA
-DAD='ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/HG003_NA24149_father/NIST_Illumina_2x250bps/novoalign_bams/HG003.GRCh38.2x250.bam'
-samtools view -uh $DAD chr20:29400000-34400000 | \
-samtools sort -n - | \
-bedtools bamtofastq -i /dev/stdin/ -fq $OUTDIR/dad.1.fq -fq2 $OUTDIR/dad.2.fq
-
-# ---------------------------
-
-# get rid of bam indexes that were also downloaded
-rm *bam.bai
-
-# gzip fq files
-for file in $OUTDIR/*fq
-do gzip $file
-done
+# use parallel to download 2 accessions at a time. 
+cat $ACCLIST | parallel -j 2 "fasterq-dump -O ${OUTDIR} {}"

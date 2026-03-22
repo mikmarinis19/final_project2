@@ -23,9 +23,10 @@ OUTDIR=../../results/02_qc/fastqc_raw
 mkdir -p $OUTDIR
 
 # run fastqc. "*fq" tells it to run on the illumina fastq files in directory "data/"
-fastqc -t 6 -o $OUTDIR ../../data/*1.fq.gz
-fastqc -t 6 -o $OUTDIR ../../data/*2.fq.gz
-
+# run fastqc on all first reads
+fastqc -t 6 -o $OUTDIR ../../fastq/*_1.fastq
+# run fastqc on all second reads
+fastqc -t 6 -o $OUTDIR ../../fastq/*_2.fastq
 module load MultiQC/1.9
 
 # run on fastqc output
