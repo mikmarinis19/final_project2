@@ -11,7 +11,6 @@
 #SBATCH -o %x_%j.out
 #SBATCH -e %x_%j.err
 
-
 hostname
 date
 
@@ -19,15 +18,18 @@ date
 module load fastqc/0.11.7
 
 # create output directory
-OUTDIR=../../results/02_qc/fastqc_raw
-mkdir -p $OUTDIR
+OUTDIR=../../results/02_qc/fastqc_raw/Yoruba_fastqc
+mkdir -p "$OUTDIR"
 
-# run fastqc. "*fq" tells it to run on the illumina fastq files in directory "data/"
-# run fastqc on all first reads
-fastqc -t 6 -o $OUTDIR ../../fastq/*_1.fastq
-# run fastqc on all second reads
-fastqc -t 6 -o $OUTDIR ../../fastq/*_2.fastq
-module load MultiQC/1.9
+# input directories
+DIR="/core/projects/GAP/GDA/final_project2/Yoruba_fastq"
 
-# run on fastqc output
-multiqc -f -o $OUTDIR/multiqc $OUTDIR
+# run FastQC on all samples together (better thread usage)
+fastqc -t 6 -o "$OUTDIR" \
+    "$DIR"/*fastq.gz
+
+# load MultiQC
+module load MultiQC/1.33
+
+# run MultiQC on FastQC output
+multiqc -f -o "$OUTDIR/multiqc" "$OUTDIR"

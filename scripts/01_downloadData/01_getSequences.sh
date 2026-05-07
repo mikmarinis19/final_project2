@@ -14,20 +14,19 @@
 hostname
 date
 
-#################################################################
-# This code uses my accessionlist to download all the SRA fastq data that I am interesed in.
-# I manually created my accessionlist, which only represents the SRA data listed as "roots".
-# For the purposes of my study, it is the only data that I am interested in.  
-#################################################################
-
 # load software
 module load parallel/20180122
 module load sratoolkit/3.0.1
 
-# My outdirectory is fastq and my code uses my accessionlist to select the data to download. 
-OUTDIR=../../fastq
-    mkdir -p ${OUTDIR}
-ACCLIST=../../metadata/accessionlist.txt 
+# Yoruba
+OUTDIR1=../Yoruba_fastq
+mkdir -p ${OUTDIR1}
+ACCLIST1=../../metadata/accessionlistYoruba.txt
 
-# use parallel to download 2 accessions at a time. 
-cat $ACCLIST | parallel -j 2 "fasterq-dump -O ${OUTDIR} {}"
+cat $ACCLIST1 | parallel -j 2 "fasterq-dump {} -O ${OUTDIR1} && gzip ${OUTDIR1}/{}*.fastq"
+
+# England
+OUTDIR2=../England_fastq
+mkdir -p ${OUTDIR2}
+ACCLIST2=../../metadata/accessionlistEngland.txt
+

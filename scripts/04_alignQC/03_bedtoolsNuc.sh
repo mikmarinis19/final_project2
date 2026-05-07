@@ -16,8 +16,9 @@ date
 
 # load required software
 
-module load bedtools/2.29.0
-module load samtools/1.16.1
+module load bedtools/2.31.1
+module load samtools/1.20
+module load htslib/1.22.1
 
 # define and/or create input, output directories
 

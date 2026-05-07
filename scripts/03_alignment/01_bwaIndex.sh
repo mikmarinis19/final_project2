@@ -4,8 +4,8 @@
 #SBATCH -N 1
 #SBATCH -c 8
 #SBATCH --mem=80G
+#SBATCH --partition=general
 #SBATCH --qos=general
-#SBATCH --partition=xeon
 #SBATCH --mail-user=
 #SBATCH --mail-type=ALL
 #SBATCH -o %x_%j.out
@@ -23,9 +23,7 @@ mkdir -p $INDEXDIR
 
 GENOME=../../genome/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta
 
-
 # Create index for genome
-    # requires significant memory for indexing
 bwa-mem2 index \
    -p $INDEXDIR/GRCh38 \
    $GENOME
