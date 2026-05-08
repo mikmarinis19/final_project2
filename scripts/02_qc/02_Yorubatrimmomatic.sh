@@ -17,7 +17,7 @@ date
 
 module load Trimmomatic/0.39
 
-# directories (your structure is in /scratch)
+# directories 
 BASEDIR=/core/projects/GAP/GDA/final_project2/
 INDIR=${BASEDIR}/Yoruba_fastq
 TRIMDIR=${BASEDIR}/results/02_qc/Yoruba_trimmed_fastq
