@@ -26,7 +26,7 @@ module load parallel/20180122
 # input and output directories
 
 INDIR=../../results/03_Alignment/bwa_align/England
-OUTDIR=../../results/04_alignQC/samstats
+OUTDIR=../../results/04_alignQC/samstats/England
 mkdir -p $OUTDIR
 
 # samtools bam statistics
