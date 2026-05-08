@@ -17,7 +17,7 @@ date
 # load required software
 module load genmap/1.3.0
 
-# define and/or create input, output directories
+# define input and output directories
 INDEXDIR=../../results/04_alignQC/genmapindex
 
 OUTDIR=../../results/04_alignQC/genmapmappability
