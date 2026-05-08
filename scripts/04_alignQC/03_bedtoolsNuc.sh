@@ -20,7 +20,7 @@ module load bedtools/2.31.1
 module load samtools/1.20
 module load htslib/1.22.1
 
-# define and/or create input, output directories
+# Genome and output directory
 
 OUTDIR=../../results/04_alignQC/bedtoolsnuc
 mkdir -p ${OUTDIR}
