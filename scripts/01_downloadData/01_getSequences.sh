@@ -30,3 +30,4 @@ OUTDIR2=../England_fastq
 mkdir -p ${OUTDIR2}
 ACCLIST2=../../metadata/accessionlistEngland.txt
 
+cat $ACCLIST2 | parallel -j 2 "fasterq-dump {} -O ${OUTDIR2} && gzip ${OUTDIR2}/{}*.fastq"
