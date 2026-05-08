@@ -25,7 +25,7 @@ module load htslib/1.22.1
 
 INDIR=../../results/03_Alignment/bwa_align/England
 
-OUTDIR=../../results/04_alignQC/coverage
+OUTDIR=../../results/04_alignQC/coverage/England
 mkdir -p $OUTDIR
 
 # create faidx genome index file
