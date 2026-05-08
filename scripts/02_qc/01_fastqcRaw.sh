@@ -18,18 +18,32 @@ date
 module load fastqc/0.11.7
 
 # create output directory
-OUTDIR=../../results/02_qc/fastqc_raw/Yoruba_fastqc
-mkdir -p "$OUTDIR"
+OUTDIR1=../../results/02_qc/fastqc_raw/Yoruba_fastqc
+mkdir -p "$OUTDIR1"
 
 # input directories
-DIR="/core/projects/GAP/GDA/final_project2/Yoruba_fastq"
+DIR1="/core/projects/GAP/GDA/final_project2/Yoruba_fastq"
 
-# run FastQC on all samples together (better thread usage)
-fastqc -t 6 -o "$OUTDIR" \
-    "$DIR"/*fastq.gz
+# run FastQC 
+fastqc -t 6 -o "$OUTDIR1" \
+    "$DIR1"/*fastq.gz
 
 # load MultiQC
 module load MultiQC/1.33
 
 # run MultiQC on FastQC output
-multiqc -f -o "$OUTDIR/multiqc" "$OUTDIR"
+multiqc -f -o "$OUTDIR/multiqc" "$OUTDIR1"
+
+# create output directory
+OUTDIR2=../../results/02_qc/fastqc_raw/England_fastqc
+mkdir -p "$OUTDIR2"
+
+# input directories
+DIR2="/core/projects/GAP/GDA/final_project2/England_fastq"
+
+# run FastQC 
+fastqc -t 6 -o "$OUTDIR2" \
+    "$DIR2"/*fastq.gz
+
+# run MultiQC on FastQC output
+multiqc -f -o "$OUTDIR2/multiqc" "$OUTDIR2"
