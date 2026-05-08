@@ -21,7 +21,6 @@ module load htslib/1.21-gcc-11.4.0-m4swynp
 module load bcftools/1.19
 module load parallel/20240322
 module load vcflib/1.0.13
-# module load bedtools/2.29.0 
 
 # in and out directories 
 
