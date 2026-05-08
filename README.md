@@ -6,7 +6,7 @@ Next, in 02_qc, it runs fastqc and multiqc on the data. Next, it runs trimmomati
 
 In 03_alignment, an index of the genome is created using bwa-mem2. Next, in 02_EnglandbwaAlign.sh and 02_YorubabwaAlign.sh, the trimmed fastqc files are aligned to the reference genome. Again, the in-directories would have to be renamed and correctly defined for the specific in-directory population(s) that one would want to look at. However, this is a minor edit. This step produces bam files from the fastq files. 
 
-In 04_alignmentQC, samstats is run on the fastq files. Next, coverage is calculated, and bedtools is run. A gene map index and a gene map is made. 
+In 04_alignmentQC, samstats is run on the outputted bam files. Next, coverage is calculated, and bedtools is run. A gene map index and a gene map is made. 
 
 Afterwards, in 05_variantcalling, variants are called in parallel using freebayes. The bam files from 03_alignment are used to create a singular vcf file. 06_filteringAnnotating has a script that does very basic filtering on this data. This is because this project was originally done using low coverage whole genome sequencing data. It can be adapted for more stringent filtering for higher coverage data. 
 
