@@ -33,7 +33,7 @@ GENOME=../../genome/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KM
 FAI=../../genome/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta.fai
 samtools faidx ${GENOME}
 
-# make a "genome" file, required by bedtools makewindows command, set variable for location
+# Set variable for location
 GFILE=${OUTDIR}/GRCh38.genome
 cut -f 1-2 $FAI > $GFILE
 
