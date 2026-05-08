@@ -13,37 +13,25 @@
 hostname
 date
 
-##################################
-# calculate stats on alignments
-##################################
-
-# calculate alignment statistics for each bam file using samtools
-
-# load software--------------------------------------------------------------------------
 # load software
-module load bwa-mem2/2.1      # (safe to include, avoids weird env issues)
+module load bwa-mem2/2.1      
 module load samblaster/0.1.24
-
-# FIX samtools issue
 module load samtools/1.19.2
-
-# FIX libcrypto dependency
 module load openssl/1.0
+module load MultiQC/1.29 
 
 # parallel
 module load parallel/20180122
 
-# FIX MultiQC python issue
-module load MultiQC/1.29   # newer version (if available)
-# input, output directories--------------------------------------------------------------
+# input and output directories
 
 INDIR=../../results/03_Alignment/bwa_align/England
 OUTDIR=../../results/04_alignQC/samstats
 mkdir -p $OUTDIR
 
-# samtools bam statistics----------------------------------------------------------------
-	# use a loop to create command lines for samtools stats
-	# pipe commands to `parallel`
+# samtools bam statistics
+# use a loop to create command lines for samtools stats
+# pipe commands to `parallel`
 for file in $(find $INDIR -name "*bam"); 
 do 
 SAM=$(basename $file .bam)
@@ -52,7 +40,7 @@ done | \
 parallel -j 15
 
 
-# put the basic stats all in one file.---------------------------------------------------
+# put the basic stats all in one file
 FILES=($(find $OUTDIR -name "*.stats" | sort))
 
 grep "^SN" ${FILES[0]} | cut -f 2 > $OUTDIR/SN.txt
