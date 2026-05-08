@@ -17,7 +17,7 @@ date
 
 module load Trimmomatic/0.39
 
-# directories (your structure is in /scratch)
+# directories 
 BASEDIR=/scratch/mmarinis/final_project2
 INDIR=${BASEDIR}/England_fastq
 TRIMDIR=${BASEDIR}/results/02_qc/England_trimmed_fastq
@@ -34,7 +34,7 @@ SAMPLE=$(sed -n "$((SLURM_ARRAY_TASK_ID+1))p" $ACCESSION_FILE)
 
 echo "Processing $SAMPLE"
 
-# run trimmomatic (FIXED)
+# run trimmomatic 
 java -jar /isg/shared/apps/Trimmomatic/0.39/trimmomatic-0.39.jar PE -threads 4 \
     ${INDIR}/${SAMPLE}_1.fastq.gz \
     ${INDIR}/${SAMPLE}_2.fastq.gz \
