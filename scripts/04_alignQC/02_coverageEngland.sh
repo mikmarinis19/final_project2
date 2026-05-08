@@ -21,7 +21,7 @@ module load bamtools/2.5.1
 module load samtools/1.19.2
 module load htslib/1.22.1
 
-# define and/or create input, output directories
+# define input and output directories
 
 INDIR=../../results/03_Alignment/bwa_align/England
 
