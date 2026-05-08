@@ -4,7 +4,7 @@ First, in 01_downloadData, this code downloads data, and relies on SRA data (fro
 
 Next, in 02_qc, it runs fastqc and multiqc on the data. Next, it runs trimmomatic to trim the files. It then runs fastqc and multiqc again on the trimmed files. 02_qc was originally done on two populations (Yoruba and England), while a partner ran similar code on the third population. This folder would have to be edited slightly to run directly on three populations for the specific populations looked at. For example, the in-directories would have to be renamed and correctly defined for the specific in-directory population(s) that one would want to look at. However, this is a minor edit. 
 
-In 03_alignment, an index of the genome is created using bwa-mem2. Next, in 02_EnglandbwaAlign.sh and 02_YorubabwaAlign.sh, the trimmed fastqc files are aligned to the reference genome. Again, the in-directories would have to be renamed and correctly defined for the specific in-directory population(s) that one would want to look at. However, this is a minor edit. This step produces bam files from the fastq files. 
+In 03_alignment, an index of the genome is created using bwa-mem2. Next, in 02_EnglandbwaAlign.sh and 02_YorubabwaAlign.sh, the trimmed fastq files are aligned to the reference genome. Again, the in-directories would have to be renamed and correctly defined for the specific in-directory population(s) that one would want to look at. However, this is a minor edit. This step produces bam files from the fastq files. 
 
 In 04_alignmentQC, samstats is run on the outputted bam files. Next, coverage is calculated, and bedtools is run. A gene map index and a gene map is made. 
 
