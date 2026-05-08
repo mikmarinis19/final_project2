@@ -17,7 +17,7 @@ date
 # load required software
 module load genmap/1.3.0
 
-# define and/or create input, output directories
+# define input and output directories
 GENOME=../../genome/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta
 
 OUTDIR=../../results/04_alignQC/
