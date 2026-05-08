@@ -19,7 +19,7 @@ date
 module load bwa-mem2/2.1
 module load samblaster/0.1.24
 module load samtools/1.21-gcc-11.4.0-mcohq7c
-module load openssl   # ✅ FIX: resolves libcrypto.so.10 error
+module load openssl   
 
 # base directory
 BASEDIR=/core/projects/GAP/GDA/final_project2
