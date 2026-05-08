@@ -32,7 +32,7 @@ fastqc -t 6 -o "$OUTDIR1" \
 module load MultiQC/1.33
 
 # run MultiQC on FastQC output
-multiqc -f -o "$OUTDIR/multiqc" "$OUTDIR1"
+multiqc -f -o "$OUTDIR1/multiqc" "$OUTDIR1"
 
 # create output directory
 OUTDIR2=../../results/02_qc/fastqc_raw/England_fastqc
