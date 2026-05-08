@@ -15,10 +15,6 @@
 hostname
 date
 
-# Create Mantis verison of freebayes that can be run on large data set
-# Test on test_data directory first
-# 3 British samples, 3 Han samples, 3 Tibetan samples
-
 # load required software
 module load freebayes/1.3.10
 module load htslib/1.21-gcc-11.4.0-m4swynp
@@ -27,7 +23,7 @@ module load parallel/20240322
 module load vcflib/1.0.13
 # module load bedtools/2.29.0 
 
-# directories/files # update for each population
+# in and out directories 
 
 INDIR=../../results/03_Alignment/bwa_align/
 
@@ -37,13 +33,13 @@ mkdir -p ${OUTDIR}
 # make a list of bam files
 find ${INDIR} -name "*.bam" > ${INDIR}/bam_list.txt
 
-# set a variable for the reference genome location  #NR listed a different file# #ASK#
+# set a variable for the reference genome location  
 GENOME=../../genome/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta
 
-# DIFFERENT# #ASK NR# #100KB regions?# #Use 02_coverage.sh?#
+# Targents, 100kb windows 
 TARGETS=../../results/04_alignQC/coverage/GRCh38_100kb.bed
 
-# Call variants in parallel using freebayes #Can we review this code?# #What is skip coverage 35000?#
+# Call variants in parallel using freebayes 
 (cat "$TARGETS" | sed 's/\t/:/ ; s/\t/-/' | parallel -k -j 56 \
 "freebayes -f ${GENOME} --bam-list ${INDIR}/bam_list.txt -r {} --skip-coverage 1000 -k" \
 ) |
